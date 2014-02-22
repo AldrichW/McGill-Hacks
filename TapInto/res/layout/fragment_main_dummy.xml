@@ -20,6 +20,7 @@
         android:text = "@string/restaurant"
         />
 
+<<<<<<< HEAD
 
     <TextView
         android:id="@+id/contentView"
@@ -30,5 +31,7 @@
         android:layout_toRightOf="@+id/section_label"
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+=======
+>>>>>>> 13953e87f4fbe58f4b44414a7dae2eeadab50b28
 
 </RelativeLayout>
