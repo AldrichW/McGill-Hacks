@@ -1,31 +1,48 @@
 package com.mchacks.tapinto;
 
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 import java.util.Locale;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.FragmentTransaction;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.IntentFilter.MalformedMimeTypeException;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.nfc.NdefMessage;
+import android.nfc.NdefRecord;
+import android.nfc.NfcAdapter;
+import android.nfc.Tag;
+import android.nfc.tech.Ndef;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
-import android.view.Gravity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
-
+	
+	/*
+	 * Heindrik Stuff: NFC implementation
+	 */
+    public static final String TAG = "TapInto";
+    private NfcAdapter mNfcAdapter;
+    public static final String MIME_TEXT_PLAIN = "text/plain";
+    
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -40,16 +57,27 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
      * The {@link ViewPager} that will host the section contents.
      */
     ViewPager mViewPager;
-
+    
+    /*
+     * UI declarations
+     */
+    public static TextView contentView;
+    public static Button restaurant_button;
+    
+    /*
+     * onCreate function
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    	Log.i(TAG,"> onCreate");
+    	super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         // Set up the action bar.
         final ActionBar actionBar = getActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#86d142")));
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        Log.i(TAG,"> ActionBar Setup Complete");
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the app.
@@ -58,6 +86,20 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+        
+        // Set up NFC Adapter
+        mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        
+        /*
+		 * Check if NFC Exist with the phone
+		 */
+		if (mNfcAdapter == null){
+			Toast.makeText(this, "This device doesn't support NFC.", Toast.LENGTH_LONG).show();
+            finish();
+            return;
+		}
+		
+		Log.i(TAG,"> NFC Exists and is Enabled");
 
         // When swiping between different sections, select the corresponding
         // tab. We can also use ActionBar.Tab#select() to do this if we have
@@ -65,6 +107,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
+            	Log.i(TAG,"onPageSelected Called: " + position);
                 actionBar.setSelectedNavigationItem(position);
             }
             
@@ -77,13 +120,15 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             // the TabListener interface, as the callback (listener) for when
             // this tab is selected.
             actionBar.addTab(
-                    actionBar.newTab()
+                             actionBar.newTab()
                             .setText(mSectionsPagerAdapter.getPageTitle(i))
                             .setTabListener(this));
-        }
-  /*      
-         */
-    }
+        }        
+        
+        //handle Intent
+        handleIntent(getIntent());
+        
+    }// End of OnCreate
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -92,18 +137,116 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         
 
         return true;
+    }//End of onCreateOptionsMenu
+    
+    /*
+     * Activity Methods
+     */
+    
+    @Override
+    protected void onResume() {
+        super.onResume();
+         
+        /**
+         * It's important, that the activity is in the foreground (resumed). Otherwise
+         * an IllegalStateException is thrown. 
+         */
+        Log.i(TAG,"** Resumed **");
+        setupForegroundDispatch(this, mNfcAdapter);
     }
+    @Override
+    protected void onPause() {
+        /**
+         * Call this before onPause, otherwise an IllegalArgumentException is thrown as well.
+         */
+    	Log.i(TAG,"** onPause **");
+        stopForegroundDispatch(this, mNfcAdapter);
+         
+        super.onPause();
+    }
+    /**
+     * @param activity The corresponding {@link Activity} requesting the foreground dispatch.
+     * @param adapter The {@link NfcAdapter} used for the foreground dispatch.
+     */
+    public static void setupForegroundDispatch(final Activity activity, NfcAdapter adapter) {
+        final Intent intent = new Intent(activity.getApplicationContext(), activity.getClass());
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+ 
+        final PendingIntent pendingIntent = PendingIntent.getActivity(activity.getApplicationContext(), 0, intent, 0);
+ 
+        IntentFilter[] filters = new IntentFilter[1];
+        String[][] techList = new String[][]{};
+ 
+        // Notice that this is the same filter as in our manifest.
+        filters[0] = new IntentFilter();
+        filters[0].addAction(NfcAdapter.ACTION_NDEF_DISCOVERED);
+        filters[0].addCategory(Intent.CATEGORY_DEFAULT);
+        try {
+            filters[0].addDataType(MIME_TEXT_PLAIN);
+        } catch (MalformedMimeTypeException e) {
+            throw new RuntimeException("Check your mime type.");
+        }
+         
+        adapter.enableForegroundDispatch(activity, pendingIntent, filters, techList);
+    }
+    /**
+     * @param activity The corresponding {@link BaseActivity} requesting to stop the foreground dispatch.
+     * @param adapter The {@link NfcAdapter} used for the foreground dispatch.
+     */
+    public static void stopForegroundDispatch(final Activity activity, NfcAdapter adapter) {
+        adapter.disableForegroundDispatch(activity);
+    }    
+
+    /*
+     * Heindrik: NFC Implementation
+     */
+    @Override
+    protected void onNewIntent(Intent intent) { 
+        /**
+         * This method gets called, when a new Intent gets associated with the current activity instance.
+         * Instead of creating a new activity, onNewIntent will be called. For more information have a look
+         * at the documentation.
+         * 
+         * In our case this method gets called, when the user attaches a Tag to the device.
+         */
+        handleIntent(intent);
+    }
+    private void handleIntent(Intent intent){
+    	String action = intent.getAction();
+        if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)) {
+             
+            String type = intent.getType();
+            if (MIME_TEXT_PLAIN.equals(type)) {
+     
+                Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+                new NdefReaderTask().execute(tag);
+                Log.i(TAG,"ACTION_NDEF_DISCOVERED");
+            } else {
+                Log.d(TAG, "Wrong mime type: " + type);
+            }
+        }
+    }
+    
+
+    
+    
+    /* 
+     * Aldrich:
+     * Tab Stuff
+     */
     
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
         // When the given tab is selected, switch to the corresponding page in
+   
         // the ViewPager.
         mViewPager.setCurrentItem(tab.getPosition());
-    }
+    }//onTabSelected
 
     @Override
     public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-        Button restaurant_button = (Button) findViewById(R.id.restaurant_button);
+        
+        restaurant_button = (Button) mViewPager.findViewById(R.id.restaurant_button);
         
         restaurant_button.setOnClickListener(new Button.OnClickListener(){  
             public void onClick(View v)
@@ -112,11 +255,11 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
                 startActivity(newIntent);
             }
          });
-    }
+    }//onTabUnselected
 
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-        Button restaurant_button = (Button) findViewById(R.id.restaurant_button);
+ 
         
         restaurant_button.setOnClickListener(new Button.OnClickListener(){  
             public void onClick(View v)
@@ -125,7 +268,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
                 startActivity(newIntent);
             }
          });
-    }
+    }//onTabReselected
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -168,8 +311,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
                     return getString(R.string.explore_section).toUpperCase(l);
             }
             return null;
-        }
-    }
+        }//Char Sequence
+    }//SectionsPagerAdapter
 
     /**
      * A dummy fragment representing a section of the app, but that simply
@@ -190,11 +333,110 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main_dummy, container, false);
             TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
+            contentView = (TextView) rootView.findViewById(R.id.contentView);
             dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
-            	
+            Log.i(TAG,"CreateView for Fragment called!");
+            contentView.setText("Nothing Shown!");
+            
 
             return rootView; 
+        }//onCreateView
+    }//DummySectionFragment
+    
+    /*
+     * Inner CLASS NdefReader
+     */
+ // ================
+    /**
+     * Background task for reading the data. Do not block the UI thread while reading. 
+     * 
+     * @author Ralf Wondratschek
+     *
+     */
+    private class NdefReaderTask extends AsyncTask<Tag, Void, String> {
+        
+        @Override
+        protected String doInBackground(Tag... params) {
+            Tag tag = params[0];
+             
+            Ndef ndef = Ndef.get(tag);
+            Log.i(TAG,"NdefReaderTask");
+            if (ndef == null) {
+                // NDEF is not supported by this Tag.
+            	Log.i(TAG,"NDEF_NOT SUPPORTED");
+                return null;
+            }
+     
+            NdefMessage ndefMessage = ndef.getCachedNdefMessage();
+     
+            NdefRecord[] records = ndefMessage.getRecords();
+            for (NdefRecord ndefRecord : records) {
+            	Log.i(TAG,"Checking Records!");
+            	if(ndefRecord.getTnf() == NdefRecord.TNF_WELL_KNOWN){
+            		Log.i(TAG,"TNF_WELL_KNOWN!");
+            		try{
+            			return readText(ndefRecord);
+            		}catch(UnsupportedEncodingException e) {
+                    	
+                        Log.e(TAG, "Unsupported Encoding", e);
+                    }
+            	}else if (ndefRecord.getTnf() == NdefRecord.TNF_MIME_MEDIA){
+            		Log.i(TAG,"MIME_MEDIA!");
+            		
+            	}
+            	
+                if (ndefRecord.getTnf() == NdefRecord.TNF_WELL_KNOWN && Arrays.equals(ndefRecord.getType(), NdefRecord.RTD_TEXT)) {
+                	Log.i(TAG,"PASSED CONDITION!");
+                	try {
+                        return readText(ndefRecord);
+                    } catch (UnsupportedEncodingException e) {
+                    	
+                        Log.e(TAG, "Unsupported Encoding", e);
+                    }
+                }
+            }
+     
+            return null;
         }
-    }
+         
+        private String readText(NdefRecord record) throws UnsupportedEncodingException {
+            /*
+             * See NFC forum specification for "Text Record Type Definition" at 3.2.1 
+             * 
+             * http://www.nfc-forum.org/specs/
+             * 
+             * bit_7 defines encoding
+             * bit_6 reserved for future use, must be 0
+             * bit_5..0 length of IANA language code
+             */
+        	Log.i(TAG,"** Reading Text **");
+            byte[] payload = record.getPayload();
+     
+            // Get the Text Encoding
+            String textEncoding = ((payload[0] & 128) == 0) ? "UTF-8" : "UTF-16";
+     
+            // Get the Language Code
+            int languageCodeLength = payload[0] & 0063;
+             
+            // String languageCode = new String(payload, 1, languageCodeLength, "US-ASCII");
+            // e.g. "en"
+             
+            // Get the Text
+            return new String(payload, languageCodeLength + 1, payload.length - languageCodeLength - 1, textEncoding);
+        }
+         
+        @Override
+        protected void onPostExecute(String result) {
+            if (result != null) {
+            	Log.i(TAG,"NFC has content, now running onPostExecute!");
+                contentView.setText(result);
+            }else{
+            	Log.i(TAG,"** Result is NULL **");
+            	contentView.setText("NFC is not compatible");
+            }
+            
+            
+        }
+    }//end of reader class
 
-}
+}//MainActivity
