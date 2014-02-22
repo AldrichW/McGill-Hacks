@@ -20,18 +20,15 @@
         android:text = "@string/restaurant"
         />
 
-<<<<<<< HEAD
 
     <TextView
         android:id="@+id/contentView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ttc_button"
         android:layout_marginTop="44dp"
         android:layout_toRightOf="@+id/section_label"
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-=======
->>>>>>> 13953e87f4fbe58f4b44414a7dae2eeadab50b28
+
 
 </RelativeLayout>

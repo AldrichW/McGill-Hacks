@@ -72,7 +72,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     	Log.i(TAG,"> onCreate");
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        
+        
         // Set up the action bar.
         final ActionBar actionBar = getActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#86d142")));
@@ -241,7 +242,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
    
         // the ViewPager.
         mViewPager.setCurrentItem(tab.getPosition());
-<<<<<<< HEAD
     }//onTabSelected
 
     @Override
@@ -270,20 +270,10 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             }
          });
     }//onTabReselected
-=======
 
-    }
+  
 
-    @Override
-    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-
-    }
-
-    @Override
-    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-
-    }
->>>>>>> 13953e87f4fbe58f4b44414a7dae2eeadab50b28
+ 
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -346,34 +336,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         }//Char Sequence
     }//SectionsPagerAdapter
 
-    /**
-     * A dummy fragment representing a section of the app, but that simply
-     * displays dummy text.
-     */
-    public static class DummySectionFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        public static final String ARG_SECTION_NUMBER = "section_number";
-
-        public DummySectionFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main_dummy, container, false);
-            TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
-            contentView = (TextView) rootView.findViewById(R.id.contentView);
-            dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
-            Log.i(TAG,"CreateView for Fragment called!");
-            contentView.setText("Nothing Shown!");
-            
-
-            return rootView; 
-        }//onCreateView
-    }//DummySectionFragment
+   
     
     /*
      * Inner CLASS NdefReader
@@ -430,7 +393,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
      
             return null;
         }
-<<<<<<< HEAD
          
         private String readText(NdefRecord record) throws UnsupportedEncodingException {
             /*
@@ -471,8 +433,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             
         }
     }//end of reader class
-=======
-    }
+    
     
     public static class SFragment1 extends Fragment {
         /**
@@ -487,10 +448,11 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main_dummy, container, false);
+        	Log.i(TAG,"SFragment1");
+        	View rootView = inflater.inflate(R.layout.fragment_main_dummy, container, false);
             TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
             dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
-            	
+            contentView = (TextView) rootView.findViewById(R.id.contentView);	
 
             return rootView; 
         }
@@ -538,6 +500,5 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             return rootView; 
         }
     }
->>>>>>> 13953e87f4fbe58f4b44414a7dae2eeadab50b28
 
 }//MainActivity
