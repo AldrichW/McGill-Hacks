@@ -1,0 +1,5 @@
+com.android.ide.eclipse.adt.autoPickTarget=false
+com.android.ide.eclipse.adt.fixLegacyEditors=1
+com.android.ide.eclipse.adt.sdk=/Users/aldrichW/Downloads/Programs/adt-bundle-mac-x86_64-20130729/sdk
+com.android.ide.eclipse.adt.xmlEditor=true
+eclipse.preferences.version=1

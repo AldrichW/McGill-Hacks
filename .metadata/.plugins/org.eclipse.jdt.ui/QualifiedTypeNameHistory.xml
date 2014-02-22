@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="android.nfc.NfcAdapter"/>
+<fullyQualifiedTypeName name="android.content.Context"/>
+<fullyQualifiedTypeName name="android.nfc.NfcManager"/>
+<fullyQualifiedTypeName name="android.provider.Settings"/>
+<fullyQualifiedTypeName name="android.app.ActionBar"/>
+<fullyQualifiedTypeName name="android.graphics.Color"/>
+<fullyQualifiedTypeName name="android.graphics.drawable.ColorDrawable"/>
+<fullyQualifiedTypeName name="com.mchacks.tapinto.R.layout"/>
+<fullyQualifiedTypeName name="com.mchacks.tapinto.R.id"/>
+<fullyQualifiedTypeName name="android.widget.Button"/>
+<fullyQualifiedTypeName name="android.content.Intent"/>
+<fullyQualifiedTypeName name="com.mchacks.tapinto.MainActivity"/>
+</qualifiedTypeNameHistroy>
