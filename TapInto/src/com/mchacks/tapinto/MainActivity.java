@@ -37,7 +37,7 @@ import android.widget.Toast;
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
 	
 	/*
-	 * Heindrik Stuff: NFC implementation
+	 * Heindrik Stuff: NFC declaration
 	 */
     public static final String TAG = "TapInto";
     private NfcAdapter mNfcAdapter;
@@ -59,6 +59,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
      */
     ViewPager mViewPager;
     
+    public ActionBar actionBar;
+    
     /*
      * UI declarations
      */
@@ -74,12 +76,9 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
+        actionBarUpdate("initial");
         
-        // Set up the action bar.
-        final ActionBar actionBar = getActionBar();
-        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#86d142")));
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        //Log.i(TAG,"ActionBar Setup Complete");
+     //Log.i(TAG,"ActionBar Setup Complete");
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the app.
@@ -131,6 +130,26 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         handleIntent(getIntent());
         
     }// End of OnCreate
+    
+    public void actionBarUpdate(String temp){
+    	Log.i(TAG,"actionBarUpdate temp: "+temp);
+    	if (temp.equals("initial")){
+    	   // Set up the action bar.
+           actionBar = getActionBar();
+           actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#86d142")));
+           actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+    	}else if (temp.equals("Restaurant")){
+    		actionBar.getTabAt(0).setText("Restaurant");
+    		actionBar.getTabAt(1).setText("Menu");
+    		actionBar.getTabAt(2).setText("Reviews");
+    	}else if (temp.equals("STM")){
+    		actionBar.getTabAt(0).setText("STM");
+    		actionBar.getTabAt(1).setText("Next Arrival");
+    		actionBar.getTabAt(2).setText("Route");
+    	}
+    }
+    
+    
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -190,7 +209,9 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     	Log.i(TAG,"6. DESTROYED");
     }
     
- 
+    /*
+     * 
+     */
     
     /**
      * @param activity The corresponding {@link Activity} requesting the foreground dispatch.
@@ -520,6 +541,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             if (result != null) {
             	NFCData = result;
                 contentView.setText(result);
+                actionBarUpdate(NFCData);
                 Log.i(TAG,"NFC has content! Data: " + NFCData);
             }else{
             	Log.i(TAG,"** Result is NULL **");
