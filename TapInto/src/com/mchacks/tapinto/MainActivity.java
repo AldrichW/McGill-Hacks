@@ -244,10 +244,10 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
              
             String type = intent.getType();
             if (MIME_TEXT_PLAIN.equals(type)) {
-     
+            	Log.i(TAG,"ACTION_NDEF_DISCOVERED");
                 Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
                 new NdefReaderTask().execute(tag);
-                Log.i(TAG,"ACTION_NDEF_DISCOVERED");
+                
             } else {
                 Log.d(TAG, "Wrong mime type: " + type);
             }
@@ -362,7 +362,75 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         }//Char Sequence
     }//SectionsPagerAdapter
 
-   
+  
+    /*
+     * Fragments  
+     */
+    public static class SFragment1 extends Fragment {
+        /**
+         * The fragment argument representing the section number for this
+         * fragment.
+         */
+        public static final String ARG_SECTION_NUMBER = "section_number";
+
+        public SFragment1() {
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                Bundle savedInstanceState) {
+        	Log.i(TAG,"SFragment1");
+        	View rootView = inflater.inflate(R.layout.fragment_main_dummy, container, false);
+            TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
+            dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
+            contentView = (TextView) rootView.findViewById(R.id.contentView);	
+
+            return rootView; 
+        }
+    }
+    
+    public static class SFragment2 extends Fragment {
+        /**
+         * The fragment argument representing the section number for this
+         * fragment.
+         */
+        public static final String ARG_SECTION_NUMBER = "section_number";
+
+        public SFragment2() {
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment2, container, false);
+            TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
+            dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
+            	
+
+            return rootView; 
+        }
+    }
+    public static class SFragment3 extends Fragment {
+        /**
+         * The fragment argument representing the section number for this
+         * fragment.
+         */
+        public static final String ARG_SECTION_NUMBER = "section_number";
+
+        public SFragment3() {
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment3, container, false);
+            TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
+            dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
+            	
+
+            return rootView; 
+        }
+    }
     
     /*
      * Inner CLASS NdefReader
@@ -459,72 +527,4 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             
         }
     }//end of reader class
-    
-    
-    public static class SFragment1 extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        public static final String ARG_SECTION_NUMBER = "section_number";
-
-        public SFragment1() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-        	Log.i(TAG,"SFragment1");
-        	View rootView = inflater.inflate(R.layout.fragment_main_dummy, container, false);
-            TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
-            dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
-            contentView = (TextView) rootView.findViewById(R.id.contentView);	
-
-            return rootView; 
-        }
-    }
-    
-    public static class SFragment2 extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        public static final String ARG_SECTION_NUMBER = "section_number";
-
-        public SFragment2() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment2, container, false);
-            TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
-            dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
-            	
-
-            return rootView; 
-        }
-    }
-    public static class SFragment3 extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        public static final String ARG_SECTION_NUMBER = "section_number";
-
-        public SFragment3() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment3, container, false);
-            TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
-            dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
-            	
-
-            return rootView; 
-        }
-    }
-
 }//MainActivity
