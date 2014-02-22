@@ -42,6 +42,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     public static final String TAG = "TapInto";
     private NfcAdapter mNfcAdapter;
     public static final String MIME_TEXT_PLAIN = "text/plain";
+    public String NFCData ="";
     
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -517,8 +518,9 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         @Override
         protected void onPostExecute(String result) {
             if (result != null) {
-            	Log.i(TAG,"NFC has content, now running onPostExecute!");
+            	NFCData = result;
                 contentView.setText(result);
+                Log.i(TAG,"NFC has content! Data: " + NFCData);
             }else{
             	Log.i(TAG,"** Result is NULL **");
             	contentView.setText("NFC is not compatible");
@@ -527,4 +529,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             
         }
     }//end of reader class
+    
+    
 }//MainActivity
