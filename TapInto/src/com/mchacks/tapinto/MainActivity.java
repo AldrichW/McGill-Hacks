@@ -69,7 +69,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-    	Log.i(TAG,"> onCreate");
+    	Log.i(TAG,"1. CREATED");
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
@@ -78,7 +78,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         final ActionBar actionBar = getActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#86d142")));
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        Log.i(TAG,"> ActionBar Setup Complete");
+        //Log.i(TAG,"ActionBar Setup Complete");
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the app.
@@ -100,7 +100,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             return;
 		}
 		
-		Log.i(TAG,"> NFC Exists and is Enabled");
+		Log.i(TAG,"NFC Exists and is Enabled");
 
         // When swiping between different sections, select the corresponding
         // tab. We can also use ActionBar.Tab#select() to do this if we have
@@ -145,6 +145,18 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
      */
     
     @Override
+    protected void onStart(){
+    	super.onStart();
+    	Log.i(TAG,"2. STARTED");
+    }
+    
+    @Override
+    protected void onRestart(){
+    	super.onRestart();
+    	Log.i(TAG,"2. RE-STARTED");
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
          
@@ -152,7 +164,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
          * It's important, that the activity is in the foreground (resumed). Otherwise
          * an IllegalStateException is thrown. 
          */
-        Log.i(TAG,"** Resumed **");
+        Log.i(TAG,"3. RESUMED");
         setupForegroundDispatch(this, mNfcAdapter);
     }
     @Override
@@ -160,11 +172,25 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         /**
          * Call this before onPause, otherwise an IllegalArgumentException is thrown as well.
          */
-    	Log.i(TAG,"** onPause **");
+    	Log.i(TAG,"4. PAUSED");
         stopForegroundDispatch(this, mNfcAdapter);
          
         super.onPause();
     }
+    @Override
+    protected void onStop(){
+    	super.onStop();
+    	finish();
+    	Log.i(TAG,"5. STOPPED");
+    }
+    @Override
+    protected void onDestroy(){
+    	super.onDestroy();
+    	Log.i(TAG,"6. DESTROYED");
+    }
+    
+ 
+    
     /**
      * @param activity The corresponding {@link Activity} requesting the foreground dispatch.
      * @param adapter The {@link NfcAdapter} used for the foreground dispatch.
