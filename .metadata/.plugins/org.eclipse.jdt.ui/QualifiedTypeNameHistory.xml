@@ -7,9 +7,12 @@
 <fullyQualifiedTypeName name="android.app.ActionBar"/>
 <fullyQualifiedTypeName name="android.graphics.Color"/>
 <fullyQualifiedTypeName name="android.graphics.drawable.ColorDrawable"/>
-<fullyQualifiedTypeName name="com.mchacks.tapinto.R.layout"/>
-<fullyQualifiedTypeName name="com.mchacks.tapinto.R.id"/>
 <fullyQualifiedTypeName name="android.widget.Button"/>
 <fullyQualifiedTypeName name="android.content.Intent"/>
+<fullyQualifiedTypeName name="android.widget.BaseAdapter"/>
+<fullyQualifiedTypeName name="android.widget.ImageView"/>
 <fullyQualifiedTypeName name="com.mchacks.tapinto.MainActivity"/>
+<fullyQualifiedTypeName name="com.mchacks.tapinto.R.layout"/>
+<fullyQualifiedTypeName name="com.mchacks.tapinto.R.id"/>
+<fullyQualifiedTypeName name="android.widget.TabHost"/>
 </qualifiedTypeNameHistroy>

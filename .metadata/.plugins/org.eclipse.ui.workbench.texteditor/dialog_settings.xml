@@ -3,24 +3,26 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="263" key="DIALOG_WIDTH"/>
 		<item value="56" key="DIALOG_Y_ORIGIN"/>
-		<item value="924" key="DIALOG_X_ORIGIN"/>
 		<item value="399" key="DIALOG_HEIGHT"/>
+		<item value="924" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Lucida Grande|11.0|0|COCOA|1|LucidaGrande" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
-		<item value="false" key="casesensitive"/>
 		<item value="false" key="isRegEx"/>
+		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="Adapter" key="selection"/>
+		<item value="Restaurant" key="selection"/>
 		<list key="findhistory">
-			<item value="adapter"/>
-			<item value="pageadapter"/>
-			<item value="ew onCreateV"/>
-			<item value="label"/>
-			<item value="getPageTitle"/>
-			<item value="nfcAdapter"/>
+			<item value="restaurant"/>
+			<item value="SFragment2"/>
+			<item value="firsttabupdate"/>
+			<item value="onpageselected"/>
+			<item value="SectionsPagerAdapter"/>
+			<item value="setSelectedNavigationItem"/>
+			<item value="Bundle"/>
+			<item value="bundle"/>
 		</list>
 		<list key="replacehistory">
 		</list>

@@ -37,6 +37,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -163,7 +164,17 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     		final TextView overviewname = (TextView) findViewById(R.id.overviewTitle);
     		final ImageView image = (ImageView) findViewById(R.id.overviewImage);
     		final TextView overviewdesc = (TextView) findViewById(R.id.overviewDescription);
-    		final ImageView image2 = (ImageView) findViewById(R.id.imageView1);
+    		
+    		//scrollview
+    		final ImageView menu_image1 = (ImageView) findViewById(R.id.item_img1);
+    		final ImageView menu_image2 = (ImageView) findViewById(R.id.item_img2);
+    		final TextView item_title1 = (TextView) findViewById (R.id.item_title1);
+    		final TextView item_title2 = (TextView) findViewById (R.id.item_title2);
+    		final TextView item_desc1 = (TextView) findViewById (R.id.item_desc1);
+    		final TextView item_desc2 = (TextView) findViewById (R.id.item_desc2);
+    		final ScrollView scroll = (ScrollView) findViewById(R.id.scroll);
+    		
+    		
     		final TextView text1 = (TextView) findViewById(R.id.textView1);
     		final TextView text2 = (TextView) findViewById(R.id.textView2);
     		final Button button = (Button) findViewById(R.id.button1);
@@ -175,9 +186,23 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     							 "for its winning combination of " +
     							 "an energetic atmosphere, delicious menu");
     		text1.setText("Specials");
-    		text2.setText("Bugogi Beef $2.99");
-    		image2.setImageResource(R.drawable.bulgogi_beef);
-    		image2.setVisibility(View.VISIBLE);
+    		item_title1.setText("The Canadian Burger");
+    		menu_image1.setImageResource(R.drawable.hamburger);
+    		item_desc1.setText("A classic tradition. Cheeseburger with bacon, lettuce" +
+    						"tomatoes, onions, and pickles - $13.00");
+    		
+    		item_title2.setText("Thai Chicken ");
+    		menu_image2.setImageResource(R.drawable.thai_chicken);
+    		item_desc2.setText("Sweet and zesty chicken with an east-asian twist" +
+    						   "- $16.00");
+    		
+    		scroll.setVisibility(View.VISIBLE);
+    		menu_image1.setVisibility(View.VISIBLE);
+    		item_title1.setVisibility(View.VISIBLE);
+    		item_title2.setVisibility(View.VISIBLE);
+    		menu_image2.setVisibility(View.VISIBLE);
+    		item_desc1.setVisibility(View.VISIBLE);
+    		item_desc2.setVisibility(View.VISIBLE);
     		text1.setVisibility(View.VISIBLE);
     		text2.setVisibility(View.VISIBLE);
     		button.setVisibility(View.GONE);
@@ -206,20 +231,44 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     		final TextView text2 = (TextView) findViewById(R.id.textView2);
     		final Button button = (Button) findViewById(R.id.button1);
     		final EditText text3 = (EditText) findViewById(R.id.editText1);
+    		
+    		final ScrollView scroll = (ScrollView) findViewById(R.id.scroll);
+    		
+    		final ImageView menu_image1 = (ImageView) findViewById(R.id.item_img1);
+    		final ImageView menu_image2 = (ImageView) findViewById(R.id.item_img2);
+    		final TextView item_title1 = (TextView) findViewById (R.id.item_title1);
+    		final TextView item_title2 = (TextView) findViewById (R.id.item_title2);
+    		final TextView item_desc1 = (TextView) findViewById (R.id.item_desc1);
+    		final TextView item_desc2 = (TextView) findViewById (R.id.item_desc2);
+    		image.setImageResource(R.drawable.stm);
+    		overviewdesc.setText("La Société de transport de Montréal assure les besoins de" +
+    							 " mobilité de la population en offrant un réseau de transport " +
+    							 "collectif de bus et");
+    		
+    	
+    		
     		overviewname.setText("STM: Societe de Montreal");
-    		image2.setVisibility(View.VISIBLE);
+    		text1.setText("Route Section");
+    		text2.setText("Route Details");
+    		image2.setImageResource(R.drawable.map);
     		text1.setVisibility(View.VISIBLE);
+    		
     		text2.setVisibility(View.VISIBLE);
+    		
+    		image2.setVisibility(View.VISIBLE);
+    		
+    		scroll.setVisibility(View.GONE);
+    		menu_image1.setVisibility(View.GONE);
+    		menu_image2.setVisibility(View.GONE);
+    		item_title1.setVisibility(View.GONE);
+    		item_title2.setVisibility(View.GONE);	
+    		item_desc1.setVisibility(View.GONE);
+    		item_desc2.setVisibility(View.GONE);
+    		
     		button.setVisibility(View.GONE);
     		text3.setVisibility(View.GONE);
 
-    		image.setImageResource(R.drawable.stm);
-    		overviewdesc.setText("la Société de transport de Montréal assure les besoins de" +
-    							 " mobilité de la population en offrant un réseau de transport " +
-    							 "collectif de bus et");
-    		image2.setImageResource(R.drawable.map);
-    		text1.setText("Route Section");
-    		text2.setText("Route Details");
+	
     		if (!initialized){
     			initialized=true;
     			handleIntent(getIntent());
@@ -246,7 +295,26 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     		final TextView text2 = (TextView) findViewById(R.id.textView2);
     		final Button button = (Button) findViewById(R.id.button1);
     		final EditText text3 = (EditText) findViewById(R.id.editText1);
+    		
+    		final ScrollView scroll = (ScrollView) findViewById(R.id.scroll); 
+    		
+    		final ImageView menu_image1 = (ImageView) findViewById(R.id.item_img1);
+    		final ImageView menu_image2 = (ImageView) findViewById(R.id.item_img2);
+    		final TextView item_title1 = (TextView) findViewById (R.id.item_title1);
+    		final TextView item_title2 = (TextView) findViewById (R.id.item_title2);
+    		final TextView item_desc1 = (TextView) findViewById (R.id.item_desc1);
+    		final TextView item_desc2 = (TextView) findViewById (R.id.item_desc2);
+    		
+    		scroll.setVisibility(View.GONE);
     		image2.setVisibility(View.GONE);
+    		text1.setVisibility(View.GONE);
+    		text2.setVisibility(View.GONE);
+    		menu_image1.setVisibility(View.GONE);
+    		item_title1.setVisibility(View.GONE);
+    		item_title2.setVisibility(View.GONE);
+    		menu_image2.setVisibility(View.GONE);
+    		item_desc1.setVisibility(View.GONE);
+    		item_desc2.setVisibility(View.GONE);
     		text1.setVisibility(View.GONE);
     		text2.setVisibility(View.GONE);
     		button.setVisibility(View.VISIBLE);

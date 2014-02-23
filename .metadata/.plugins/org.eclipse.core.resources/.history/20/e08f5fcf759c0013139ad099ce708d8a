@@ -1,0 +1,172 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity$SFragment1" >
+
+    <TextView
+        android:id="@+id/section_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+    />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/section_label"
+        android:layout_alignTop="@+id/section_label"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="62dp"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/section_label"
+        android:layout_alignParentTop="true"/>
+    
+       <ScrollView 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:orientation="vertical"
+    android:background="@drawable/menuitem">
+    
+    <LinearLayout
+    android:id="@+id/parentLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+    android:background="#0099cc"
+    android:orientation="vertical">
+        <RelativeLayout 
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:background="@drawable/menuitem_select"
+		    android:orientation="horizontal"
+		    android:padding="5dp"
+		    >
+		        <LinearLayout
+		        android:id="@+id/thumbnail"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignParentLeft="true"
+		        android:layout_marginRight="5dip"
+		        android:padding="3dip" >
+			        <ImageView
+			            android:id="@+id/item_img1"
+			            android:contentDescription="@string/app_name"
+			            android:layout_width="60dip"
+			            android:layout_height="60dip"/>
+		    	</LinearLayout>
+		    	<TextView
+		        android:id="@+id/item_title1"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_toRightOf="@+id/item_image1"
+		        android:layout_marginLeft="75dip"
+		        android:layout_centerVertical="true"
+		        android:paddingBottom ="10dip"
+		      
+		        android:textColor="#525452"
+		        android:textSize="25dip"
+		        android:textStyle="bold"
+		        android:typeface="sans" />
+		    <!-- Weather Information-->
+		    	<TextView
+		        android:id="@+id/item_desc1"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@+id/item_title1"
+		        android:layout_alignLeft="@+id/item_title1"
+		        android:paddingTop="5dip"
+		        android:layout_centerHorizontal="true"
+	
+		        android:textColor="#343434"
+		        android:textSize="15dip" />
+    
+		</RelativeLayout>
+	<RelativeLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/menuitem_select"
+    android:orientation="horizontal"
+    android:padding="5dp">
+    <LinearLayout
+        android:id="@+id/thumbnail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="5dip"
+        android:padding="3dip" >
+	        <ImageView
+	            android:id="@+id/item_img2"
+	            android:contentDescription="@string/app_name"
+	            android:layout_width="60dip"
+	            android:layout_height="60dip"
+	          />
+    	</LinearLayout>
+    	<TextView
+        android:id="@+id/item_title2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/item_image2"
+        android:layout_marginLeft="75dip"
+        android:layout_centerVertical="true"
+        android:paddingBottom ="10dip"
+
+        android:textColor="#525452"
+        android:textSize="25dip"
+        android:textStyle="bold"
+        android:typeface="sans" />
+    <!-- Weather Information-->
+    	<TextView
+        android:id="@+id/item_desc2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/item_title2"
+        android:layout_alignLeft="@+id/item_title2"
+        android:paddingTop="5dip"
+        android:layout_centerHorizontal="true"
+        android:text="Beef is damm good brother"
+        android:textColor="#343434"
+        android:textSize="15dip" />
+    
+	</RelativeLayout>
+     </LinearLayout>
+
+</ScrollView>
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editText1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="98dp"
+        android:visibility="gone" />
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="36dp"
+        android:ems="10"
+        android:visibility="gone" >
+
+        <requestFocus />
+    </EditText>
+
+</RelativeLayout>
