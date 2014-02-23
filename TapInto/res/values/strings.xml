@@ -3,11 +3,20 @@
 
     <string name="app_name">TapInto</string>
     <string name="action_settings">Settings</string>
+    
+    <!-- old main UI strings -->
     <string name="tap_section">Tap</string>
     <string name="history_section">History</string>
     <string name="explore_section">Explore</string>
+    
+    <!-- restaurant menu strings -->
+    <string name="specials_section">Specials</string>
+    <string name="menu_section">Menu</string>
+    <string name="drinks_section">Drinks</string>
+    
     <string name="action_server">CallServer</string>
     <string name="action_search">SearchActivity</string>
+    
     <string name="restaurant">Restaurant</string>
     <string name="ttc">TTC</string>
     <string name="title_activity_restaurant">RestaurantActivity</string>

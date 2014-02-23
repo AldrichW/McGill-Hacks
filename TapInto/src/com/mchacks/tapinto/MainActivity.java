@@ -37,11 +37,12 @@ import android.widget.Toast;
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
 	
 	/*
-	 * Heindrik Stuff: NFC implementation
+	 * Heindrik Stuff: NFC declaration
 	 */
     public static final String TAG = "TapInto";
     private NfcAdapter mNfcAdapter;
     public static final String MIME_TEXT_PLAIN = "text/plain";
+    public String NFCData ="";
     
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -58,6 +59,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
      */
     ViewPager mViewPager;
     
+    public ActionBar actionBar;
+    
     /*
      * UI declarations
      */
@@ -69,16 +72,13 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-    	Log.i(TAG,"> onCreate");
+    	Log.i(TAG,"1. CREATED");
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
+        actionBarUpdate("initial");
         
-        // Set up the action bar.
-        final ActionBar actionBar = getActionBar();
-        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#86d142")));
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        Log.i(TAG,"> ActionBar Setup Complete");
+     //Log.i(TAG,"ActionBar Setup Complete");
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the app.
@@ -100,7 +100,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             return;
 		}
 		
-		Log.i(TAG,"> NFC Exists and is Enabled");
+		Log.i(TAG,"NFC Exists and is Enabled");
 
         // When swiping between different sections, select the corresponding
         // tab. We can also use ActionBar.Tab#select() to do this if we have
@@ -130,6 +130,26 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         handleIntent(getIntent());
         
     }// End of OnCreate
+    
+    public void actionBarUpdate(String temp){
+    	Log.i(TAG,"actionBarUpdate temp: "+temp);
+    	if (temp.equals("initial")){
+    	   // Set up the action bar.
+           actionBar = getActionBar();
+           actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#86d142")));
+           actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+    	}else if (temp.equals("Restaurant")){
+    		actionBar.getTabAt(0).setText("Restaurant");
+    		actionBar.getTabAt(1).setText("Menu");
+    		actionBar.getTabAt(2).setText("Reviews");
+    	}else if (temp.equals("STM")){
+    		actionBar.getTabAt(0).setText("STM");
+    		actionBar.getTabAt(1).setText("Next Arrival");
+    		actionBar.getTabAt(2).setText("Route");
+    	}
+    }
+    
+    
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -145,6 +165,18 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
      */
     
     @Override
+    protected void onStart(){
+    	super.onStart();
+    	Log.i(TAG,"2. STARTED");
+    }
+    
+    @Override
+    protected void onRestart(){
+    	super.onRestart();
+    	Log.i(TAG,"2. RE-STARTED");
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
          
@@ -152,7 +184,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
          * It's important, that the activity is in the foreground (resumed). Otherwise
          * an IllegalStateException is thrown. 
          */
-        Log.i(TAG,"** Resumed **");
+        Log.i(TAG,"3. RESUMED");
         setupForegroundDispatch(this, mNfcAdapter);
     }
     @Override
@@ -160,11 +192,27 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         /**
          * Call this before onPause, otherwise an IllegalArgumentException is thrown as well.
          */
-    	Log.i(TAG,"** onPause **");
+    	Log.i(TAG,"4. PAUSED");
         stopForegroundDispatch(this, mNfcAdapter);
          
         super.onPause();
     }
+    @Override
+    protected void onStop(){
+    	super.onStop();
+    	finish();
+    	Log.i(TAG,"5. STOPPED");
+    }
+    @Override
+    protected void onDestroy(){
+    	super.onDestroy();
+    	Log.i(TAG,"6. DESTROYED");
+    }
+    
+    /*
+     * 
+     */
+    
     /**
      * @param activity The corresponding {@link Activity} requesting the foreground dispatch.
      * @param adapter The {@link NfcAdapter} used for the foreground dispatch.
@@ -218,10 +266,10 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
              
             String type = intent.getType();
             if (MIME_TEXT_PLAIN.equals(type)) {
-     
+            	Log.i(TAG,"ACTION_NDEF_DISCOVERED");
                 Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
                 new NdefReaderTask().execute(tag);
-                Log.i(TAG,"ACTION_NDEF_DISCOVERED");
+                
             } else {
                 Log.d(TAG, "Wrong mime type: " + type);
             }
@@ -336,7 +384,75 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         }//Char Sequence
     }//SectionsPagerAdapter
 
-   
+  
+    /*
+     * Fragments  
+     */
+    public static class SFragment1 extends Fragment {
+        /**
+         * The fragment argument representing the section number for this
+         * fragment.
+         */
+        public static final String ARG_SECTION_NUMBER = "section_number";
+
+        public SFragment1() {
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                Bundle savedInstanceState) {
+        	Log.i(TAG,"SFragment1");
+        	View rootView = inflater.inflate(R.layout.fragment_main_dummy, container, false);
+            TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
+            dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
+            contentView = (TextView) rootView.findViewById(R.id.contentView);	
+
+            return rootView; 
+        }
+    }
+    
+    public static class SFragment2 extends Fragment {
+        /**
+         * The fragment argument representing the section number for this
+         * fragment.
+         */
+        public static final String ARG_SECTION_NUMBER = "section_number";
+
+        public SFragment2() {
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment2, container, false);
+            TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
+            dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
+            	
+
+            return rootView; 
+        }
+    }
+    public static class SFragment3 extends Fragment {
+        /**
+         * The fragment argument representing the section number for this
+         * fragment.
+         */
+        public static final String ARG_SECTION_NUMBER = "section_number";
+
+        public SFragment3() {
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment3, container, false);
+            TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
+            dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
+            	
+
+            return rootView; 
+        }
+    }
     
     /*
      * Inner CLASS NdefReader
@@ -423,8 +539,10 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         @Override
         protected void onPostExecute(String result) {
             if (result != null) {
-            	Log.i(TAG,"NFC has content, now running onPostExecute!");
+            	NFCData = result;
                 contentView.setText(result);
+                actionBarUpdate(NFCData);
+                Log.i(TAG,"NFC has content! Data: " + NFCData);
             }else{
             	Log.i(TAG,"** Result is NULL **");
             	contentView.setText("NFC is not compatible");
@@ -435,70 +553,4 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     }//end of reader class
     
     
-    public static class SFragment1 extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        public static final String ARG_SECTION_NUMBER = "section_number";
-
-        public SFragment1() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-        	Log.i(TAG,"SFragment1");
-        	View rootView = inflater.inflate(R.layout.fragment_main_dummy, container, false);
-            TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
-            dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
-            contentView = (TextView) rootView.findViewById(R.id.contentView);	
-
-            return rootView; 
-        }
-    }
-    
-    public static class SFragment2 extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        public static final String ARG_SECTION_NUMBER = "section_number";
-
-        public SFragment2() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment2, container, false);
-            TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
-            dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
-            	
-
-            return rootView; 
-        }
-    }
-    public static class SFragment3 extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        public static final String ARG_SECTION_NUMBER = "section_number";
-
-        public SFragment3() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment3, container, false);
-            TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
-            dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
-            	
-
-            return rootView; 
-        }
-    }
-
 }//MainActivity
