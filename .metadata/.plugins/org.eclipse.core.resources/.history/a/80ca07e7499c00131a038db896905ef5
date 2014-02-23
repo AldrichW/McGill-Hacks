@@ -60,6 +60,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
      * The {@link ViewPager} that will host the section contents.
      */
     ViewPager mViewPager;
+    static TabHost mTabHost;
     
     public ActionBar actionBar;
     public static ImageView image;
@@ -79,7 +80,12 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     	Log.i(TAG,"1. CREATED");
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+<<<<<<< HEAD
+        
+        
+        
+=======
+>>>>>>> c4dbcd38d4376f8eabd16f4a1c47105bb608a870
         actionBarUpdate("initial");
                
     }// End of OnCreate
@@ -92,7 +98,14 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         mViewPager.setAdapter(mSectionsPagerAdapter);
         
         // Set up NFC Adapter
+<<<<<<< HEAD
+        mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        
+        
+        
+=======
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);    
+>>>>>>> c4dbcd38d4376f8eabd16f4a1c47105bb608a870
         /*
 		 * Check if NFC Exist with the phone
 		 */
@@ -134,7 +147,11 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     }
     public void actionBarUpdate(String temp){
     	Log.i(TAG,"actionBarUpdate temp: "+temp);
-    	
+<<<<<<< HEAD
+    	image = (ImageView) findViewById(R.id.overviewImage);
+=======
+
+>>>>>>> c4dbcd38d4376f8eabd16f4a1c47105bb608a870
     	if (temp.equals("initial")){
     	   // Set up the action bar.
            actionBar = getActionBar();
@@ -155,12 +172,16 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     		
     		actionBar.getTabAt(1).setText("Menu");
     		actionBar.getTabAt(2).setText("Reviews");
-
+<<<<<<< HEAD
+    	
+    		//image = (ImageView) findViewById(R.id.overviewImage);
+=======
     		final TextView overviewname = (TextView) findViewById(R.id.overviewTitle);
     		final ImageView image = (ImageView) findViewById(R.id.overviewImage);
     		final TextView overviewdesc = (TextView) findViewById(R.id.overviewDescription);
     		
     		overviewname.setText("Jack Astors Bar & Grill");
+>>>>>>> c4dbcd38d4376f8eabd16f4a1c47105bb608a870
     		image.setImageResource(R.drawable.jackastors);
     		overviewdesc.setText("Jack Astor's is renowned " +
     							 "for its winning combination of " +
@@ -179,12 +200,15 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     		actionBar.getTabAt(0).setText("STM");
     		actionBar.getTabAt(1).setText("Next Arrival");
     		actionBar.getTabAt(2).setText("Route");
-
+<<<<<<< HEAD
+    		Log.i(TAG,"Getting the image");
+    		//image = (ImageView) findViewById(R.id.overviewImage);
+=======
     		final TextView overviewname = (TextView) findViewById(R.id.overviewTitle);
     		final ImageView image = (ImageView) findViewById(R.id.overviewImage);
     		final TextView overviewdesc = (TextView) findViewById(R.id.overviewDescription);
     		overviewname.setText("STM: Societe de Montreal");
-
+>>>>>>> c4dbcd38d4376f8eabd16f4a1c47105bb608a870
     		image.setImageResource(R.drawable.stm);
     		overviewdesc.setText("la Société de transport de Montréal assure les besoins de" +
     							 " mobilité de la population en offrant un réseau de transport " +
@@ -205,12 +229,14 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     		actionBar.getTabAt(0).setText("McHacks");
     		actionBar.getTabAt(1).setText("Social");
     		actionBar.getTabAt(2).setText("Sponsors");
-
+<<<<<<< HEAD
+    		//image = (ImageView) findViewById(R.id.overviewImage);
+=======
     		final TextView overviewname = (TextView) findViewById(R.id.overviewTitle);
     		final ImageView image = (ImageView) findViewById(R.id.overviewImage);
     		final TextView overviewdesc = (TextView) findViewById(R.id.overviewDescription);
     		overviewname.setText("McHacks 2014");
-
+>>>>>>> c4dbcd38d4376f8eabd16f4a1c47105bb608a870
     		image.setImageResource(R.drawable.mchacks);
     		overviewdesc.setText("McHacks is a 24 hour hackathon hosted at McGill University " +
     				"'open to undergraduate students from all colleges.");
@@ -220,8 +246,11 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     		}
     		
     	}
-
+<<<<<<< HEAD
     	Log.i(TAG,"End of actionBarUpdate");
+=======
+
+>>>>>>> c4dbcd38d4376f8eabd16f4a1c47105bb608a870
     }
     
     
@@ -284,8 +313,14 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     	Log.i(TAG,"6. DESTROYED");
     }
     
+<<<<<<< HEAD
+    /**
+     * @param activity The corresponding {@link Activity} requesting the foreground dispatch.
+     * @param adapter The {@link NfcAdapter} used for the foreground dispatch.
+=======
     /*
      *  Foreground Methods
+>>>>>>> 065877360bfacd1fddec2476b29743fb3aeb82ce
      */
     public static void setupForegroundDispatch(final Activity activity, NfcAdapter adapter) {
         final Intent intent = new Intent(activity.getApplicationContext(), activity.getClass());
@@ -469,12 +504,20 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         	if(container==null)
         		return null;
         	
+        	if (savedInstanceState != null) {
+        	    mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));
+        	}
+        	
         	View rootView = inflater.inflate(R.layout.fragment_main_dummy, container, false);
             TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
             dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
             contentView = (TextView) rootView.findViewById(R.id.contentView);
 
             return rootView; 
+        }
+        public void onSaveInstanceState(Bundle outState) {
+            outState.putString("tab", mTabHost.getCurrentTabTag());
+            super.onSaveInstanceState(outState);
         }
 
     }

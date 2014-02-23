@@ -60,6 +60,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
      * The {@link ViewPager} that will host the section contents.
      */
     ViewPager mViewPager;
+    static TabHost mTabHost;
     
     public ActionBar actionBar;
     public static ImageView image;
@@ -468,6 +469,10 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         	Log.i(TAG,"SFragment1");
         	if(container==null)
         		return null;
+        	
+        	if (savedInstanceState != null) {
+        	    mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));
+        	}
         	
         	View rootView = inflater.inflate(R.layout.fragment_main_dummy, container, false);
             TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
