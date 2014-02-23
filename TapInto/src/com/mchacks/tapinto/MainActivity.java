@@ -177,7 +177,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     		final ScrollView scroll = (ScrollView) findViewById(R.id.scroll);
     		
     		
-    		final TextView text1 = (TextView) findViewById(R.id.textView1);
+    		//final TextView text1 = (TextView) findViewById(R.id.textView1);
     		final TextView text2 = (TextView) findViewById(R.id.textView2);
     		final Button button = (Button) findViewById(R.id.button1);
     		final EditText text3 = (EditText) findViewById(R.id.editText1);
@@ -187,7 +187,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     		overviewdesc.setText("Jack Astor's is renowned " +
     							 "for its winning combination of " +
     							 "an energetic atmosphere, delicious menu");
-    		text1.setText("Specials");
+    		//text1.setText("Specials");
     		item_title1.setText("The Canadian Burger");
     		menu_image1.setImageResource(R.drawable.hamburger);
     		item_desc1.setText("A classic tradition. Cheeseburger with bacon, lettuce" +
@@ -205,7 +205,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     		menu_image2.setVisibility(View.VISIBLE);
     		item_desc1.setVisibility(View.VISIBLE);
     		item_desc2.setVisibility(View.VISIBLE);
-    		text1.setVisibility(View.VISIBLE);
+    		//text1.setVisibility(View.VISIBLE);
     		text2.setVisibility(View.VISIBLE);
     		button.setVisibility(View.GONE);
     		text3.setVisibility(View.GONE);
@@ -229,7 +229,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     		final ImageView image = (ImageView) findViewById(R.id.overviewImage);
     		final TextView overviewdesc = (TextView) findViewById(R.id.overviewDescription);
     		final ImageView image2 = (ImageView) findViewById(R.id.imageView1);
-    		final TextView text1 = (TextView) findViewById(R.id.textView1);
+    		//final TextView text1 = (TextView) findViewById(R.id.textView1);
     		final TextView text2 = (TextView) findViewById(R.id.textView2);
     		final Button button = (Button) findViewById(R.id.button1);
     		final EditText text3 = (EditText) findViewById(R.id.editText1);
@@ -250,10 +250,12 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     	
     		
     		overviewname.setText("STM: Societe de Montreal");
-    		text1.setText("Route Section");
+    		//text1.setText("Route Section");
     		text2.setText("Route Details");
-    		image2.setImageResource(R.drawable.map);
-    		text1.setVisibility(View.VISIBLE);
+    		text2.setTextSize(30);
+    		image2.setPadding(0, 10, 0, 0);
+    		image2.setImageResource(R.drawable.route);
+    		//text1.setVisibility(View.VISIBLE);
     		
     		text2.setVisibility(View.VISIBLE);
     		
@@ -293,7 +295,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     		final ImageView image = (ImageView) findViewById(R.id.overviewImage);
     		final TextView overviewdesc = (TextView) findViewById(R.id.overviewDescription);
     		final ImageView image2 = (ImageView) findViewById(R.id.imageView1);
-    		final TextView text1 = (TextView) findViewById(R.id.textView1);
+    		//final TextView text1 = (TextView) findViewById(R.id.textView1);
     		final TextView text2 = (TextView) findViewById(R.id.textView2);
     		final Button button = (Button) findViewById(R.id.button1);
     		final EditText text3 = (EditText) findViewById(R.id.editText1);
@@ -309,7 +311,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     		
     		scroll.setVisibility(View.GONE);
     		image2.setVisibility(View.GONE);
-    		text1.setVisibility(View.VISIBLE);
+    		//text1.setVisibility(View.VISIBLE);
     		text2.setVisibility(View.GONE);
     		menu_image1.setVisibility(View.GONE);
     		item_title1.setVisibility(View.GONE);
@@ -317,15 +319,16 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     		menu_image2.setVisibility(View.GONE);
     		item_desc1.setVisibility(View.GONE);
     		item_desc2.setVisibility(View.GONE);
-    		text1.setVisibility(View.GONE);
-    		text2.setVisibility(View.GONE);
-    		text1.setVisibility(View.VISIBLE);
-    		text1.setText("Twitter Feed");
+    		//text1.setVisibility(View.GONE);
+    		text2.setVisibility(View.VISIBLE);
+    		//text1.setVisibility(View.VISIBLE);
+    		//text1.setText("Twitter Feed");
     		button.setVisibility(View.VISIBLE);
     		button.setText("Tweet");
     		text3.setVisibility(View.VISIBLE);
     		overviewname.setText("McHacks 2014");
-
+    		text2.setText("TWEET US!");
+    		text2.setTextSize(30);
     		image.setImageResource(R.drawable.mchacks);
     		overviewdesc.setText("McHacks is a 24 hour hackathon hosted at McGill University " +
     				"'open to undergraduate students from all colleges.");
