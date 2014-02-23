@@ -30,20 +30,34 @@
             android:id="@+id/contentView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="HEY!"/>
+         />
+        <TextView 
+            android:id="@+id/overviewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/contentView"
+            android:layout_alignLeft="@id/contentView"
+            android:textSize="24sp"
+            android:textStyle="bold"/>
         
         <ImageView
             android:id="@+id/overviewImage"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical = "true"
+            android:layout_below="@id/overviewTitle"
+            android:paddingTop="20dp"
             android:contentDescription="Image of Company"
+            android:maxWidth="50dp"
+            android:maxHeight="50dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
          <TextView 
             android:id="@+id/overviewDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="HEY!"/>
+            android:paddingTop="20dp"
+            android:layout_below="@id/overviewImage"
+            android:layout_alignLeft="@id/overviewImage"
+            android:textSize="14sp"/>
 <!-- comment      
     </ListView>
 </LinearLayout>

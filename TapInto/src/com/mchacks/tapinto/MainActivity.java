@@ -32,6 +32,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,6 +60,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
      * The {@link ViewPager} that will host the section contents.
      */
     ViewPager mViewPager;
+    static TabHost mTabHost;
     
     public ActionBar actionBar;
     public static ImageView image;
@@ -68,6 +70,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
      */
     public static TextView contentView;
     public static Button restaurant_button;
+    public static Boolean initialized = false;
     
     /*
      * onCreate function
@@ -77,15 +80,17 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     	Log.i(TAG,"1. CREATED");
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+<<<<<<< HEAD
         
         
         
+=======
+>>>>>>> c4dbcd38d4376f8eabd16f4a1c47105bb608a870
         actionBarUpdate("initial");
-        
-     //Log.i(TAG,"ActionBar Setup Complete");
-
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the app.
+               
+    }// End of OnCreate
+    
+    public void Initialize(){
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
@@ -93,10 +98,14 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         mViewPager.setAdapter(mSectionsPagerAdapter);
         
         // Set up NFC Adapter
+<<<<<<< HEAD
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
         
         
         
+=======
+        mNfcAdapter = NfcAdapter.getDefaultAdapter(this);    
+>>>>>>> c4dbcd38d4376f8eabd16f4a1c47105bb608a870
         /*
 		 * Check if NFC Exist with the phone
 		 */
@@ -104,8 +113,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			Toast.makeText(this, "This device doesn't support NFC.", Toast.LENGTH_LONG).show();
             finish();
             return;
-		}
-		
+		}	
 		Log.i(TAG,"NFC Exists and is Enabled");
 
         // When swiping between different sections, select the corresponding
@@ -131,43 +139,115 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
                             .setText(mSectionsPagerAdapter.getPageTitle(i))
                             .setTabListener(this));
         }        
-        
         //handle Intent
-        handleIntent(getIntent());
         
-    }// End of OnCreate
-    
+    }
     public void actionBarUpdate(String temp){
     	Log.i(TAG,"actionBarUpdate temp: "+temp);
+<<<<<<< HEAD
     	image = (ImageView) findViewById(R.id.overviewImage);
+=======
+
+>>>>>>> c4dbcd38d4376f8eabd16f4a1c47105bb608a870
     	if (temp.equals("initial")){
     	   // Set up the action bar.
            actionBar = getActionBar();
            actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#86d142")));
            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+           Initialize();
+           initialized=true;
+           handleIntent(getIntent());
+           
     	}else if (temp.equals("Restaurant")){
+                if (!initialized){
+	                actionBar = getActionBar();
+	                actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#86d142")));
+	                actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+	                Initialize();
+	            	initialized=true;
+                }
     		actionBar.getTabAt(0).setText("Restaurant");
     		actionBar.getTabAt(1).setText("Menu");
     		actionBar.getTabAt(2).setText("Reviews");
+<<<<<<< HEAD
     	
     		//image = (ImageView) findViewById(R.id.overviewImage);
+=======
+    		final TextView overviewname = (TextView) findViewById(R.id.overviewTitle);
+    		final ImageView image = (ImageView) findViewById(R.id.overviewImage);
+    		final TextView overviewdesc = (TextView) findViewById(R.id.overviewDescription);
+    		
+    		overviewname.setText("Jack Astors Bar & Grill");
+>>>>>>> c4dbcd38d4376f8eabd16f4a1c47105bb608a870
     		image.setImageResource(R.drawable.jackastors);
+    		overviewdesc.setText("Jack Astor's is renowned " +
+    							 "for its winning combination of " +
+    							 "an energetic atmosphere, delicious menu");
+    		if (!initialized){
+    			initialized=true;
+    			handleIntent(getIntent());
+    		}
     	}else if (temp.equals("STM")){
+            if (!initialized){
+                actionBar = getActionBar();
+                actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#86d142")));
+                actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+                Initialize();
+            }
     		actionBar.getTabAt(0).setText("STM");
     		actionBar.getTabAt(1).setText("Next Arrival");
     		actionBar.getTabAt(2).setText("Route");
+<<<<<<< HEAD
     		Log.i(TAG,"Getting the image");
     		//image = (ImageView) findViewById(R.id.overviewImage);
+=======
+    		final TextView overviewname = (TextView) findViewById(R.id.overviewTitle);
+    		final ImageView image = (ImageView) findViewById(R.id.overviewImage);
+    		final TextView overviewdesc = (TextView) findViewById(R.id.overviewDescription);
+    		overviewname.setText("STM: Societe de Montreal");
+>>>>>>> c4dbcd38d4376f8eabd16f4a1c47105bb608a870
     		image.setImageResource(R.drawable.stm);
+    		overviewdesc.setText("la Société de transport de Montréal assure les besoins de" +
+    							 " mobilité de la population en offrant un réseau de transport " +
+    							 "collectif de bus et");
+    		if (!initialized){
+    			initialized=true;
+    			handleIntent(getIntent());
+    		}
     	}
     	else if (temp.equals("Mchacks")){
+            if (!initialized){
+                actionBar = getActionBar();
+                actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#86d142")));
+                actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+                Initialize();
+            	
+            }
     		actionBar.getTabAt(0).setText("McHacks");
     		actionBar.getTabAt(1).setText("Social");
     		actionBar.getTabAt(2).setText("Sponsors");
+<<<<<<< HEAD
     		//image = (ImageView) findViewById(R.id.overviewImage);
+=======
+    		final TextView overviewname = (TextView) findViewById(R.id.overviewTitle);
+    		final ImageView image = (ImageView) findViewById(R.id.overviewImage);
+    		final TextView overviewdesc = (TextView) findViewById(R.id.overviewDescription);
+    		overviewname.setText("McHacks 2014");
+>>>>>>> c4dbcd38d4376f8eabd16f4a1c47105bb608a870
     		image.setImageResource(R.drawable.mchacks);
+    		overviewdesc.setText("McHacks is a 24 hour hackathon hosted at McGill University " +
+    				"'open to undergraduate students from all colleges.");
+    		if (!initialized){
+    			initialized=true;
+    			handleIntent(getIntent());
+    		}
+    		
     	}
+<<<<<<< HEAD
     	Log.i(TAG,"End of actionBarUpdate");
+=======
+
+>>>>>>> c4dbcd38d4376f8eabd16f4a1c47105bb608a870
     }
     
     
@@ -331,10 +411,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
          });
     }//onTabReselected
 
-  
-
- 
-
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
@@ -352,11 +428,12 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             // below) with the page number as its lone argument.
         	Fragment fragment;
         	if (position==0){
-            fragment = new SFragment1();
-            Bundle args = new Bundle();
-            args.putInt(SFragment1.ARG_SECTION_NUMBER, position + 1);
-            fragment.setArguments(args);
-            return fragment;
+        		
+		            fragment = new SFragment1();
+		            Bundle args = new Bundle();
+		            args.putInt(SFragment1.ARG_SECTION_NUMBER, position + 1);
+		            fragment.setArguments(args);
+		            return fragment;
         	}
         	if (position==1){
             fragment = new SFragment2();
@@ -415,12 +492,23 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
         	Log.i(TAG,"SFragment1");
+        	if(container==null)
+        		return null;
+        	
+        	if (savedInstanceState != null) {
+        	    mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));
+        	}
+        	
         	View rootView = inflater.inflate(R.layout.fragment_main_dummy, container, false);
             TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
             dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
             contentView = (TextView) rootView.findViewById(R.id.contentView);
 
             return rootView; 
+        }
+        public void onSaveInstanceState(Bundle outState) {
+            outState.putString("tab", mTabHost.getCurrentTabTag());
+            super.onSaveInstanceState(outState);
         }
 
     }
@@ -557,14 +645,19 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             if (result != null) {
             	NFCData = result;
                 contentView.setText(result);
-                actionBarUpdate(NFCData);
+                if (!initialized){
+                	Initialize();
+                	actionBarUpdate(NFCData);		            	
+                }	
+                else{
+                	actionBarUpdate(NFCData);
+                }
                 Log.i(TAG,"NFC has content! Data: " + NFCData);
             }else{
             	Log.i(TAG,"** Result is NULL **");
             	contentView.setText("NFC is not compatible");
             }
-            
-            
+                      
         }
     }//end of reader class
     
