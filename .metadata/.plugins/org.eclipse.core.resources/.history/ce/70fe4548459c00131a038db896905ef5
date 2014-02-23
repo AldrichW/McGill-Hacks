@@ -128,9 +128,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         //handle Intent
         
     }
-    public void firstTabUpdate (){
-    	actionBar.getTabAt(0).setText("Restaurant");
-    }
     public void actionBarUpdate(String temp){
     	Log.i(TAG,"actionBarUpdate temp: "+temp);
 
@@ -151,7 +148,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	                Initialize();
 	            	initialized=true;
                 }
-    		
+    		actionBar.getTabAt(0).setText("Restaurant");
     		actionBar.getTabAt(1).setText("Menu");
     		actionBar.getTabAt(2).setText("Reviews");
     		final TextView overviewname = (TextView) findViewById(R.id.overviewTitle);
@@ -276,6 +273,10 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     	super.onDestroy();
     	Log.i(TAG,"6. DESTROYED");
     }
+    
+    /*
+     * 
+     */
     
     /**
      * @param activity The corresponding {@link Activity} requesting the foreground dispatch.
@@ -524,7 +525,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             View rootView = inflater.inflate(R.layout.fragment3, container, false);
             TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
             dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
-            
+            	
+
             return rootView; 
         }
     }
