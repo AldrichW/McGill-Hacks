@@ -61,6 +61,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     ViewPager mViewPager;
     
     public ActionBar actionBar;
+    public static ImageView image;
     
     /*
      * UI declarations
@@ -77,6 +78,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
+        
+        
         actionBarUpdate("initial");
         
      //Log.i(TAG,"ActionBar Setup Complete");
@@ -91,6 +94,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         
         // Set up NFC Adapter
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        
+        
         
         /*
 		 * Check if NFC Exist with the phone
@@ -134,6 +139,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     
     public void actionBarUpdate(String temp){
     	Log.i(TAG,"actionBarUpdate temp: "+temp);
+    	image = (ImageView) findViewById(R.id.overviewImage);
     	if (temp.equals("initial")){
     	   // Set up the action bar.
            actionBar = getActionBar();
@@ -143,22 +149,25 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     		actionBar.getTabAt(0).setText("Restaurant");
     		actionBar.getTabAt(1).setText("Menu");
     		actionBar.getTabAt(2).setText("Reviews");
-    		ImageView image = (ImageView) findViewById(R.id.overviewImage);
+    	
+    		//image = (ImageView) findViewById(R.id.overviewImage);
     		image.setImageResource(R.drawable.jackastors);
     	}else if (temp.equals("STM")){
     		actionBar.getTabAt(0).setText("STM");
     		actionBar.getTabAt(1).setText("Next Arrival");
     		actionBar.getTabAt(2).setText("Route");
-    		ImageView image = (ImageView) findViewById(R.id.overviewImage);
+    		Log.i(TAG,"Getting the image");
+    		//image = (ImageView) findViewById(R.id.overviewImage);
     		image.setImageResource(R.drawable.stm);
     	}
     	else if (temp.equals("Mchacks")){
     		actionBar.getTabAt(0).setText("McHacks");
     		actionBar.getTabAt(1).setText("Social");
     		actionBar.getTabAt(2).setText("Sponsors");
-    		ImageView image = (ImageView) findViewById(R.id.overviewImage);
+    		//image = (ImageView) findViewById(R.id.overviewImage);
     		image.setImageResource(R.drawable.mchacks);
     	}
+    	Log.i(TAG,"End of actionBarUpdate");
     }
     
     
@@ -212,7 +221,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     @Override
     protected void onStop(){
     	super.onStop();
-    	finish();
+    	//finish();
     	Log.i(TAG,"5. STOPPED");
     }
     @Override
@@ -222,12 +231,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     }
     
     /*
-     * 
-     */
-    
-    /**
-     * @param activity The corresponding {@link Activity} requesting the foreground dispatch.
-     * @param adapter The {@link NfcAdapter} used for the foreground dispatch.
+     *  Foreground Methods
      */
     public static void setupForegroundDispatch(final Activity activity, NfcAdapter adapter) {
         final Intent intent = new Intent(activity.getApplicationContext(), activity.getClass());
@@ -250,10 +254,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
          
         adapter.enableForegroundDispatch(activity, pendingIntent, filters, techList);
     }
-    /**
-     * @param activity The corresponding {@link BaseActivity} requesting to stop the foreground dispatch.
-     * @param adapter The {@link NfcAdapter} used for the foreground dispatch.
-     */
     public static void stopForegroundDispatch(final Activity activity, NfcAdapter adapter) {
         adapter.disableForegroundDispatch(activity);
     }    
