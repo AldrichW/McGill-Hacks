@@ -26,30 +26,38 @@ public final class R {
         public static final int ic_action_search=0x7f020002;
         public static final int ic_launcher=0x7f020003;
         public static final int jackastors=0x7f020004;
-        public static final int mchacks=0x7f020005;
-        public static final int menuitem=0x7f020006;
-        public static final int menuitem_pressed=0x7f020007;
-        public static final int menuitem_select=0x7f020008;
-        public static final int menuitem_selected=0x7f020009;
-        public static final int stm=0x7f02000a;
+        public static final int map=0x7f020005;
+        public static final int mchacks=0x7f020006;
+        public static final int menuitem=0x7f020007;
+        public static final int menuitem_pressed=0x7f020008;
+        public static final int menuitem_select=0x7f020009;
+        public static final int menuitem_selected=0x7f02000a;
+        public static final int stm=0x7f02000b;
     }
     public static final class id {
-        public static final int action_settings=0x7f08000d;
-        public static final int contentView=0x7f080004;
-        public static final int item_image=0x7f08000b;
-        public static final int item_img=0x7f080009;
-        public static final int item_title=0x7f08000a;
-        public static final int overviewDescription=0x7f080007;
-        public static final int overviewImage=0x7f080006;
-        public static final int overviewTitle=0x7f080005;
+        public static final int action_settings=0x7f080014;
+        public static final int button1=0x7f080005;
+        public static final int contentView=0x7f080009;
+        public static final int editText1=0x7f080006;
+        public static final int imageView1=0x7f080004;
+        public static final int item_image=0x7f080010;
+        public static final int item_img=0x7f08000e;
+        public static final int item_title=0x7f08000f;
+        public static final int overviewDescription=0x7f08000c;
+        public static final int overviewImage=0x7f08000b;
+        public static final int overviewTitle=0x7f08000a;
         public static final int pager=0x7f080000;
-        public static final int restaurant_button=0x7f080002;
-        public static final int search_button=0x7f08000e;
+        public static final int post=0x7f080012;
+        public static final int restaurant_button=0x7f080007;
+        public static final int search_button=0x7f080015;
         public static final int section_label=0x7f080001;
-        public static final int server_button=0x7f08000f;
-        public static final int thumbnail=0x7f080008;
-        public static final int ttc_button=0x7f080003;
-        public static final int tvCondition=0x7f08000c;
+        public static final int server_button=0x7f080016;
+        public static final int textView1=0x7f080002;
+        public static final int textView2=0x7f080003;
+        public static final int thumbnail=0x7f08000d;
+        public static final int ttc_button=0x7f080008;
+        public static final int tvCondition=0x7f080011;
+        public static final int tweet=0x7f080013;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -58,6 +66,7 @@ public final class R {
         public static final int fragment3=0x7f030003;
         public static final int fragment_main_dummy=0x7f030004;
         public static final int menuitem_layout=0x7f030005;
+        public static final int tweeter=0x7f030006;
     }
     public static final class menu {
         public static final int main=0x7f070000;

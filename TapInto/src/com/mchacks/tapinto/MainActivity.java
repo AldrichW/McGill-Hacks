@@ -2,6 +2,7 @@ package com.mchacks.tapinto;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
 import android.app.ActionBar;
@@ -11,6 +12,8 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.IntentFilter.MalformedMimeTypeException;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.nfc.NdefMessage;
@@ -29,10 +32,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,7 +64,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
      * The {@link ViewPager} that will host the section contents.
      */
     ViewPager mViewPager;
-    
     public ActionBar actionBar;
     public static ImageView image;
     
@@ -152,19 +155,34 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	                Initialize();
 	            	initialized=true;
                 }
-    		
-    		actionBar.getTabAt(1).setText("Menu");
-    		actionBar.getTabAt(2).setText("Reviews");
+            
+            actionBar.getTabAt(0).setText("Jack Astors");
+    		actionBar.getTabAt(1).setText("Specials");
+    		//actionBar.getTabAt(2).setText("Reviews");
 
     		final TextView overviewname = (TextView) findViewById(R.id.overviewTitle);
     		final ImageView image = (ImageView) findViewById(R.id.overviewImage);
     		final TextView overviewdesc = (TextView) findViewById(R.id.overviewDescription);
+    		final ImageView image2 = (ImageView) findViewById(R.id.imageView1);
+    		final TextView text1 = (TextView) findViewById(R.id.textView1);
+    		final TextView text2 = (TextView) findViewById(R.id.textView2);
+    		final Button button = (Button) findViewById(R.id.button1);
+    		final EditText text3 = (EditText) findViewById(R.id.editText1);
     		
     		overviewname.setText("Jack Astors Bar & Grill");
     		image.setImageResource(R.drawable.jackastors);
     		overviewdesc.setText("Jack Astor's is renowned " +
     							 "for its winning combination of " +
     							 "an energetic atmosphere, delicious menu");
+    		text1.setText("Specials");
+    		text2.setText("Bugogi Beef $2.99");
+    		image2.setImageResource(R.drawable.bulgogi_beef);
+    		image2.setVisibility(View.VISIBLE);
+    		text1.setVisibility(View.VISIBLE);
+    		text2.setVisibility(View.VISIBLE);
+    		button.setVisibility(View.GONE);
+    		text3.setVisibility(View.GONE);
+    		
     		if (!initialized){
     			initialized=true;
     			handleIntent(getIntent());
@@ -177,18 +195,31 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
                 Initialize();
             }
     		actionBar.getTabAt(0).setText("STM");
-    		actionBar.getTabAt(1).setText("Next Arrival");
-    		actionBar.getTabAt(2).setText("Route");
+    		actionBar.getTabAt(1).setText("Route Map");
+    		//actionBar.getTabAt(2).setText("Route");
 
     		final TextView overviewname = (TextView) findViewById(R.id.overviewTitle);
     		final ImageView image = (ImageView) findViewById(R.id.overviewImage);
     		final TextView overviewdesc = (TextView) findViewById(R.id.overviewDescription);
+    		final ImageView image2 = (ImageView) findViewById(R.id.imageView1);
+    		final TextView text1 = (TextView) findViewById(R.id.textView1);
+    		final TextView text2 = (TextView) findViewById(R.id.textView2);
+    		final Button button = (Button) findViewById(R.id.button1);
+    		final EditText text3 = (EditText) findViewById(R.id.editText1);
     		overviewname.setText("STM: Societe de Montreal");
+    		image2.setVisibility(View.VISIBLE);
+    		text1.setVisibility(View.VISIBLE);
+    		text2.setVisibility(View.VISIBLE);
+    		button.setVisibility(View.GONE);
+    		text3.setVisibility(View.GONE);
 
     		image.setImageResource(R.drawable.stm);
     		overviewdesc.setText("la Société de transport de Montréal assure les besoins de" +
     							 " mobilité de la population en offrant un réseau de transport " +
     							 "collectif de bus et");
+    		image2.setImageResource(R.drawable.map);
+    		text1.setText("Route Section");
+    		text2.setText("Route Details");
     		if (!initialized){
     			initialized=true;
     			handleIntent(getIntent());
@@ -204,16 +235,59 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             }
     		actionBar.getTabAt(0).setText("McHacks");
     		actionBar.getTabAt(1).setText("Social");
-    		actionBar.getTabAt(2).setText("Sponsors");
+    		
+    		//actionBar.getTabAt(2).setText("Sponsors");
 
     		final TextView overviewname = (TextView) findViewById(R.id.overviewTitle);
     		final ImageView image = (ImageView) findViewById(R.id.overviewImage);
     		final TextView overviewdesc = (TextView) findViewById(R.id.overviewDescription);
+    		final ImageView image2 = (ImageView) findViewById(R.id.imageView1);
+    		final TextView text1 = (TextView) findViewById(R.id.textView1);
+    		final TextView text2 = (TextView) findViewById(R.id.textView2);
+    		final Button button = (Button) findViewById(R.id.button1);
+    		final EditText text3 = (EditText) findViewById(R.id.editText1);
+    		image2.setVisibility(View.GONE);
+    		text1.setVisibility(View.GONE);
+    		text2.setVisibility(View.GONE);
+    		button.setVisibility(View.VISIBLE);
+    		button.setText("Tweet");
+    		text3.setVisibility(View.VISIBLE);
     		overviewname.setText("McHacks 2014");
 
     		image.setImageResource(R.drawable.mchacks);
     		overviewdesc.setText("McHacks is a 24 hour hackathon hosted at McGill University " +
     				"'open to undergraduate students from all colleges.");
+    		
+    		button.setOnClickListener(new OnClickListener(){
+    			public void onClick(View v){
+    				String tmp = text3.getText().toString();
+    				Intent tweetIntent = new Intent(Intent.ACTION_SEND);
+    				tweetIntent.putExtra(Intent.EXTRA_TEXT, "@McGillHacks  "+tmp);
+    				tweetIntent.setType("text/plain");
+
+    				PackageManager packManager = getPackageManager();
+    				List<ResolveInfo> resolvedInfoList = packManager.queryIntentActivities(tweetIntent,  PackageManager.MATCH_DEFAULT_ONLY);
+
+    				boolean resolved = false;
+    				for(ResolveInfo resolveInfo: resolvedInfoList){
+    				    if(resolveInfo.activityInfo.packageName.startsWith("com.twitter.android")){
+    				        tweetIntent.setClassName(
+    				            resolveInfo.activityInfo.packageName, 
+    				            resolveInfo.activityInfo.name );
+    				        resolved = true;
+    				        break;
+    				    }
+    				}
+    				if(resolved){
+    				    startActivity(tweetIntent);
+    				}else{;
+    				    //Toast.makeText(this, "Twitter app isn't found", Toast.LENGTH_LONG).show();
+    				}
+    			}
+    			
+    			
+    		});
+
     		if (!initialized){
     			initialized=true;
     			handleIntent(getIntent());
@@ -361,7 +435,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     @Override
     public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
         
-        restaurant_button = (Button) mViewPager.findViewById(R.id.restaurant_button);
+        /*restaurant_button = (Button) mViewPager.findViewById(R.id.restaurant_button);
         
         restaurant_button.setOnClickListener(new Button.OnClickListener(){  
             public void onClick(View v)
@@ -369,20 +443,20 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
                 Intent newIntent = new Intent (MainActivity.this, RestaurantActivity.class);
                 startActivity(newIntent);
             }
-         });
+         });*/
     }//onTabUnselected
 
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
  
         
-        restaurant_button.setOnClickListener(new Button.OnClickListener(){  
+        /*restaurant_button.setOnClickListener(new Button.OnClickListener(){  
             public void onClick(View v)
             {
                 Intent newIntent = new Intent (MainActivity.this, RestaurantActivity.class);
                 startActivity(newIntent);
             }
-         });
+         });*/
     }//onTabReselected
 
     /**
@@ -428,7 +502,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 2;
         }
 
         //sets the title of each tab
