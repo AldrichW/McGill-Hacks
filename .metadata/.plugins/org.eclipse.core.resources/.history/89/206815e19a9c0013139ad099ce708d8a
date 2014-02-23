@@ -641,8 +641,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment2, container, false);
-      //      TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
-      //      dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
+            TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
+            dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
             	
 
             return rootView; 
@@ -663,8 +663,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment3, container, false);
-      //      TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
-      //      dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
+            TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
+            dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
             
             return rootView; 
         }

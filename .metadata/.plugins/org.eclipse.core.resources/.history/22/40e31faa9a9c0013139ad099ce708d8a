@@ -48,7 +48,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	
 	/*
 	 * Heindrik Stuff: NFC declaration
-	 */
     public static final String TAG = "TapInto";
     private NfcAdapter mNfcAdapter;
     public static final String MIME_TEXT_PLAIN = "text/plain";
@@ -552,21 +551,21 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         		
 		            fragment = new SFragment1();
 		            Bundle args = new Bundle();
-		            args.putInt(SFragment1.ARG_SECTION_NUMBER, position + 1);
-		            fragment.setArguments(args);
+		         //   args.putInt(SFragment1.ARG_SECTION_NUMBER, position + 1);
+		         //   fragment.setArguments(args);
 		            return fragment;
         	}
         	if (position==1){
             fragment = new SFragment2();
             Bundle args = new Bundle();
-            args.putInt(SFragment2.ARG_SECTION_NUMBER, position + 1);
-            fragment.setArguments(args);
+          //  args.putInt(SFragment2.ARG_SECTION_NUMBER, position + 1);
+           // fragment.setArguments(args);
             return fragment;
         	}
             fragment = new SFragment3();
             Bundle args = new Bundle();
-            args.putInt(SFragment2.ARG_SECTION_NUMBER, position + 1);
-            fragment.setArguments(args);
+           // args.putInt(SFragment2.ARG_SECTION_NUMBER, position + 1);
+           // fragment.setArguments(args);
             return fragment;
         	
         	
@@ -617,8 +616,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         		return null;
         	
         	View rootView = inflater.inflate(R.layout.fragment_main_dummy, container, false);
-       //     TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
-        //    dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
+            TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
+            dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
             contentView = (TextView) rootView.findViewById(R.id.contentView);
 
             return rootView; 
@@ -641,8 +640,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment2, container, false);
-      //      TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
-      //      dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
+            TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
+            dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
             	
 
             return rootView; 
@@ -663,8 +662,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment3, container, false);
-      //      TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
-      //      dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
+            TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
+            dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
             
             return rootView; 
         }
