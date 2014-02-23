@@ -1,0 +1,9 @@
+package com.mchacks.tapinto;
+
+public class RowItem extends {
+
+	public RowItem() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

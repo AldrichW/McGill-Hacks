@@ -12,27 +12,41 @@
         android:id="@+id/section_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    
-<<<<<<< HEAD
+ <!-- comment  
 <LinearLayout 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <ListView
-        android:id="@+id/list"
-=======
-    <TextView
-        android:id="@+id/contentView"
->>>>>>> a8a61c5468efc7febc33e669dd735539c5ffb2b9
-        android:layout_width="wrap_content"
-        android:layout_height="444dp"
-        android:divider="#b5b5b5"
-        android:dividerHeight="1dp"
-        android:listSelector="@drawable/menuitem_select" >
-      
+         android:id="@+id/list"
+	        android:layout_width="wrap_content"
+	        android:layout_height="444dp"
+	        android:divider="#b5b5b5"
+	        android:dividerHeight="1dp"
+	        android:listSelector="@drawable/menuitem_select" >
+-->  	        
+        <TextView 
+            android:id="@+id/contentView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HEY!"/>
+        
+        <ImageView
+            android:id="@+id/overviewImage"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical = "true"
+            android:contentDescription="Image of Company"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+         <TextView 
+            android:id="@+id/overviewDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HEY!"/>
+<!-- comment      
     </ListView>
 </LinearLayout>
 
-
+ -->
 </RelativeLayout>
