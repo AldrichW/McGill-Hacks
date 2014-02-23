@@ -49,7 +49,8 @@
             android:maxWidth="50dp"
             android:maxHeight="50dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:src="@drawable/tapinto_icon"/>
          <TextView 
             android:id="@+id/overviewDescription"
             android:layout_width="wrap_content"
@@ -57,7 +58,8 @@
             android:paddingTop="20dp"
             android:layout_below="@id/overviewImage"
             android:layout_alignLeft="@id/overviewImage"
-            android:textSize="14sp"/>
+            android:textSize="14sp"
+            android:text="Tap a Tag and Get Started!"/>
 <!-- comment      
     </ListView>
 </LinearLayout>

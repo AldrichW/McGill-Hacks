@@ -34,6 +34,9 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -85,7 +88,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         setContentView(R.layout.activity_main);
 
         actionBarUpdate("initial");
-               
+    
     }// End of OnCreate
     
     public void Initialize(){
@@ -147,7 +150,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
            Initialize();
            initialized=true;
            handleIntent(getIntent());
-           
     	}else if (temp.equals("Restaurant")){
                 if (!initialized){
 	                actionBar = getActionBar();
@@ -307,7 +309,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     		
     		scroll.setVisibility(View.GONE);
     		image2.setVisibility(View.GONE);
-    		text1.setVisibility(View.GONE);
+    		text1.setVisibility(View.VISIBLE);
     		text2.setVisibility(View.GONE);
     		menu_image1.setVisibility(View.GONE);
     		item_title1.setVisibility(View.GONE);
@@ -317,6 +319,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     		item_desc2.setVisibility(View.GONE);
     		text1.setVisibility(View.GONE);
     		text2.setVisibility(View.GONE);
+    		text1.setVisibility(View.VISIBLE);
+    		text1.setText("Twitter Feed");
     		button.setVisibility(View.VISIBLE);
     		button.setText("Tweet");
     		text3.setVisibility(View.VISIBLE);
@@ -470,6 +474,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     }
     private void handleIntent(Intent intent){
     	String action = intent.getAction();
+    	 
         if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)) {
              
             String type = intent.getType();

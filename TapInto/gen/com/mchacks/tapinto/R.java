@@ -34,7 +34,8 @@ public final class R {
         public static final int menuitem_select=0x7f02000a;
         public static final int menuitem_selected=0x7f02000b;
         public static final int stm=0x7f02000c;
-        public static final int thai_chicken=0x7f02000d;
+        public static final int tapinto_icon=0x7f02000d;
+        public static final int thai_chicken=0x7f02000e;
     }
     public static final class id {
         public static final int action_settings=0x7f08001e;
